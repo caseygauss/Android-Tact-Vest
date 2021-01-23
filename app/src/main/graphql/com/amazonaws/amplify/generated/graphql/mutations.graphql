@@ -7,6 +7,9 @@ mutation CreateTodo(
     id
     name
     description
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -19,6 +22,9 @@ mutation UpdateTodo(
     id
     name
     description
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -31,6 +37,9 @@ mutation DeleteTodo(
     id
     name
     description
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -43,6 +52,9 @@ mutation CreateHRate(
     id
     currentRate
     timeRecorded
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -55,6 +67,9 @@ mutation UpdateHRate(
     id
     currentRate
     timeRecorded
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -67,6 +82,9 @@ mutation DeleteHRate(
     id
     currentRate
     timeRecorded
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
