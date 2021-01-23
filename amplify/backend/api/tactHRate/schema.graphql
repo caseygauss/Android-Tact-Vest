@@ -1,0 +1,11 @@
+type Todo @model {
+  id: ID!
+  name: String!
+  description: String
+}
+
+type HRate @model @auth(rules: [{ allow: public, provider:apiKey }]) {
+  id: ID
+  currentRate: Int
+  timeRecorded: AWSDateTime
+}

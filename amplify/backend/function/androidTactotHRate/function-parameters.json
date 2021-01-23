@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "api": {
+      "tactHRate": [
+        "create",
+        "read",
+        "update",
+        "delete"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}

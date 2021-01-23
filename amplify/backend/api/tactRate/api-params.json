@@ -1,0 +1,43 @@
+{
+    "paths": [
+        {
+            "name": "/rate",
+            "lambdaFunction": "androidTactotHRate",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/rate"
+        },
+        {
+            "name": "/pushRate",
+            "lambdaFunction": "androidTactotHRate",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/pushRate"
+        }
+    ],
+    "resourceName": "tactRate",
+    "apiName": "tactRate",
+    "functionArns": [
+        {
+            "lambdaFunction": "androidTactotHRate"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-androidtact-dev-191150-authRole",
+        "unAuthRoleName": "amplify-androidtact-dev-191150-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "androidTactotHRate",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}
