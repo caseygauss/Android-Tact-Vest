@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Tactsuit Android Sample</string>
+    <string name="company_name">bHaptics Inc.</string>
+    <string name="title_activity_vest_demo">VestDemoActivity</string>
+    <string name="todo">TODO</string>
+    <string name="north">North</string>
+    <string name="back_button">Back Button</string>
+</resources>
