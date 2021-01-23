@@ -1,0 +1,26 @@
+{
+  "name": "androidTactotHRate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "apollo-cache-inmemory": "^1.6.6",
+    "apollo-client": "^2.6.10",
+    "apollo-link": "^1.2.14",
+    "apollo-link-http": "^1.5.17",
+    "aws-appsync": "^4.0.2",
+    "aws-sdk": "^2.518.0",
+    "aws-serverless-express": "^3.3.5",
+    "body-parser": "^1.17.1",
+    "es6-promise": "^4.2.8",
+    "express": "^4.15.2",
+    "graphql": "^15.4.0",
+    "graphql-tag": "^2.11.0",
+    "isomorphic-fetch": "^3.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
