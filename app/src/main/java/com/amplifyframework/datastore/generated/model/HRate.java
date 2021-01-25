@@ -1,6 +1,5 @@
 package com.amplifyframework.datastore.generated.model;
 
-import com.amplifyframework.core.model.temporal.Temporal;
 
 import java.util.List;
 import java.util.UUID;
@@ -27,10 +26,8 @@ import static com.amplifyframework.core.model.query.predicate.QueryField.field;
 public final class HRate implements Model {
   public static final QueryField ID = field("id");
   public static final QueryField CURRENT_RATE = field("currentRate");
-  public static final QueryField TIME_RECORDED = field("timeRecorded");
   private final @ModelField(targetType="ID", isRequired = true) String id;
   private final @ModelField(targetType="Int") Integer currentRate;
-  private final @ModelField(targetType="AWSDateTime") Temporal.DateTime timeRecorded;
   public String getId() {
       return id;
   }
@@ -39,14 +36,9 @@ public final class HRate implements Model {
       return currentRate;
   }
   
-  public Temporal.DateTime getTimeRecorded() {
-      return timeRecorded;
-  }
-  
-  private HRate(String id, Integer currentRate, Temporal.DateTime timeRecorded) {
+  private HRate(String id, Integer currentRate) {
     this.id = id;
     this.currentRate = currentRate;
-    this.timeRecorded = timeRecorded;
   }
   
   @Override
@@ -58,8 +50,7 @@ public final class HRate implements Model {
       } else {
       HRate hRate = (HRate) obj;
       return ObjectsCompat.equals(getId(), hRate.getId()) &&
-              ObjectsCompat.equals(getCurrentRate(), hRate.getCurrentRate()) &&
-              ObjectsCompat.equals(getTimeRecorded(), hRate.getTimeRecorded());
+              ObjectsCompat.equals(getCurrentRate(), hRate.getCurrentRate());
       }
   }
   
@@ -68,7 +59,6 @@ public final class HRate implements Model {
     return new StringBuilder()
       .append(getId())
       .append(getCurrentRate())
-      .append(getTimeRecorded())
       .toString()
       .hashCode();
   }
@@ -78,8 +68,7 @@ public final class HRate implements Model {
     return new StringBuilder()
       .append("HRate {")
       .append("id=" + String.valueOf(getId()) + ", ")
-      .append("currentRate=" + String.valueOf(getCurrentRate()) + ", ")
-      .append("timeRecorded=" + String.valueOf(getTimeRecorded()))
+      .append("currentRate=" + String.valueOf(getCurrentRate()))
       .append("}")
       .toString();
   }
@@ -109,47 +98,36 @@ public final class HRate implements Model {
     }
     return new HRate(
       id,
-      null,
       null
     );
   }
   
   public CopyOfBuilder copyOfBuilder() {
     return new CopyOfBuilder(id,
-      currentRate,
-      timeRecorded);
+      currentRate);
   }
   public interface BuildStep {
     HRate build();
     BuildStep id(String id) throws IllegalArgumentException;
     BuildStep currentRate(Integer currentRate);
-    BuildStep timeRecorded(Temporal.DateTime timeRecorded);
   }
   
 
   public static class Builder implements BuildStep {
     private String id;
     private Integer currentRate;
-    private Temporal.DateTime timeRecorded;
     @Override
      public HRate build() {
         String id = this.id != null ? this.id : UUID.randomUUID().toString();
         
         return new HRate(
           id,
-          currentRate,
-          timeRecorded);
+          currentRate);
     }
     
     @Override
      public BuildStep currentRate(Integer currentRate) {
         this.currentRate = currentRate;
-        return this;
-    }
-    
-    @Override
-     public BuildStep timeRecorded(Temporal.DateTime timeRecorded) {
-        this.timeRecorded = timeRecorded;
         return this;
     }
     
@@ -176,20 +154,14 @@ public final class HRate implements Model {
   
 
   public final class CopyOfBuilder extends Builder {
-    private CopyOfBuilder(String id, Integer currentRate, Temporal.DateTime timeRecorded) {
+    private CopyOfBuilder(String id, Integer currentRate) {
       super.id(id);
-      super.currentRate(currentRate)
-        .timeRecorded(timeRecorded);
+      super.currentRate(currentRate);
     }
     
     @Override
      public CopyOfBuilder currentRate(Integer currentRate) {
       return (CopyOfBuilder) super.currentRate(currentRate);
-    }
-    
-    @Override
-     public CopyOfBuilder timeRecorded(Temporal.DateTime timeRecorded) {
-      return (CopyOfBuilder) super.timeRecorded(timeRecorded);
     }
   }
   

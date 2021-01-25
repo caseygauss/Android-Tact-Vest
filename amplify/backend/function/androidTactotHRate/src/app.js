@@ -14,16 +14,19 @@ See the License for the specific language governing permissions and limitations 
 	ENV
 	REGION
 Amplify Params - DO NOT EDIT */
-
+const axios = require('axios');
 var express = require('express')
 var bodyParser = require('body-parser')
 var awsServerlessExpressMiddleware = require('aws-serverless-express/middleware')
 const AWS = require('aws-sdk');
 const graphqlQuery = require('./graphql.js').query;
+const graphqlPost = require('./graphqlPush.js').mutation;
 const gql = require('graphql-tag');
+const graphql = require('graphql');
 const AWSAppSyncClient = require('aws-appsync').default;
 require('es6-promise').polyfill();
 require('isomorphic-fetch');
+const { print } = graphql;
 
 // declare a new express app
 var app = express()
@@ -40,7 +43,7 @@ app.use(function(req, res, next) {
   next();
 });
 
-const url = process.env.API_APPSYNCTODO_GRAPHQLAPIENDPOINTOUTPUT;
+const url = process.env.API_TACTHRATE_GRAPHQLAPIENDPOINTOUTPUT;
 const region = process.env.REGION;
 
 AWS.config.update({
@@ -58,7 +61,8 @@ const appsyncClient = new AWSAppSyncClient(
     url,
     region,
     auth: {
-      type: 'AWS_IAM',
+      type: 'API.KEY',
+      apiKey: 'da2-iksdqwxhwjctzdcpbejazjdnsm',
       credentials,
     },
     disableOffline: true,
@@ -74,6 +78,7 @@ const appsyncClient = new AWSAppSyncClient(
 );
 
 const query = gql(graphqlQuery);
+const postM = gql(graphqlPost);
 
 
 /**********************
@@ -100,9 +105,73 @@ app.get('/item/*', function(req, res) {
 * Example post method *
 ****************************/
 
-app.post('/pushRate', function(req, res) {
-  // Add your code here
-  res.json({success: 'post call succeed!', url: req.url, body: req.body})
+const createHRate = gql`
+  mutation createHRate($input: CreateHRateInput!) {
+    createHRate(input: $input) {
+      currentRate
+    }
+  }
+`
+
+app.post('/pushRate', async function(req, res) {
+  console.log('push received with req ' + req);
+  
+  //var newInput = JSON.parse(req.body);
+  var newRateAr = req.body.rate;
+
+  console.log('push event dot notation ' + newRateAr);
+  //console.log('push event body parenth notation' + newInput);
+
+
+  const rateDetails = {
+    currentRate: newRateAr
+  };
+
+  const client = new AWSAppSyncClient(
+    {
+      url: "https://lf3texuvbva33ah4gyviecbgei.appsync-api.us-east-2.amazonaws.com/graphql",
+      region: 'us-east-2',
+      auth: {
+        type: 'API.KEY',
+        apiKey: 'da2-iksdqwxhwjctzdcpbejazjdnsm',
+        credentials,
+      },
+      disableOffline: true,
+    },
+    {
+      defaultOptions: {
+        query: {
+          fetchPolicy: 'network-only',
+          errorPolicy: 'all',
+        },
+      },
+    }
+  );
+
+  try {
+    const graphqlData = await axios({
+      url: "https://lf3texuvbva33ah4gyviecbgei.appsync-api.us-east-2.amazonaws.com/graphql",
+      method: 'post',
+      headers: {
+        'x-api-key': "da2-iksdqwxhwjctzdcpbejazjdnsm"
+      },
+      data: {
+        query: print(createHRate),
+        variables: {
+          input: {
+            currentRate: newRateAr
+          }
+        }
+      }
+    });
+    const body = {
+      message: "successfully created HRate!"
+    }
+    res.json({success: JSON.stringify(body), url: req.url, body: req.body})
+  } catch (err) {
+    console.log('error creating todo: ', err);
+  } 
+
 });
 
 app.post('/item/*', function(req, res) {

@@ -90,7 +90,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-androidtact-dev-191150-deployment",
-          "S3Key": "amplify-builds/androidTactotHRate-6f647a7a396c47624b38-build.zip"
+          "S3Key": "amplify-builds/androidTactotHRate-4d314330416b4b786141-build.zip"
         }
       }
     },

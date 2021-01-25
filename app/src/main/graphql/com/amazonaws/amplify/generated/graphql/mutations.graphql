@@ -51,7 +51,6 @@ mutation CreateHRate(
   createHRate(input: $input, condition: $condition) {
     id
     currentRate
-    timeRecorded
     _version
     _deleted
     _lastChangedAt
@@ -66,7 +65,6 @@ mutation UpdateHRate(
   updateHRate(input: $input, condition: $condition) {
     id
     currentRate
-    timeRecorded
     _version
     _deleted
     _lastChangedAt
@@ -81,7 +79,6 @@ mutation DeleteHRate(
   deleteHRate(input: $input, condition: $condition) {
     id
     currentRate
-    timeRecorded
     _version
     _deleted
     _lastChangedAt

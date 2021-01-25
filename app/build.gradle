@@ -52,4 +52,7 @@ dependencies {
     api(name: 'bhaptics_manager_1.07', ext: 'aar')
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+
+    //Manage DateTime in API <26
+    implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
 }

@@ -39,7 +39,6 @@ subscription OnCreateHRate {
   onCreateHRate {
     id
     currentRate
-    timeRecorded
     _version
     _deleted
     _lastChangedAt
@@ -51,7 +50,6 @@ subscription OnUpdateHRate {
   onUpdateHRate {
     id
     currentRate
-    timeRecorded
     _version
     _deleted
     _lastChangedAt
@@ -63,7 +61,6 @@ subscription OnDeleteHRate {
   onDeleteHRate {
     id
     currentRate
-    timeRecorded
     _version
     _deleted
     _lastChangedAt

@@ -1061,16 +1061,6 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "timeRecorded",
-                        "description": null,
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "ModelStringInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
                         "name": "and",
                         "description": null,
                         "type": {
@@ -1293,18 +1283,6 @@
                         "type": {
                             "kind": "SCALAR",
                             "name": "Int",
-                            "ofType": null
-                        },
-                        "isDeprecated": false,
-                        "deprecationReason": null
-                    },
-                    {
-                        "name": "timeRecorded",
-                        "description": null,
-                        "args": [],
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "AWSDateTime",
                             "ofType": null
                         },
                         "isDeprecated": false,
@@ -1862,16 +1840,6 @@
                         "defaultValue": null
                     },
                     {
-                        "name": "timeRecorded",
-                        "description": null,
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "AWSDateTime",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
                         "name": "_version",
                         "description": null,
                         "type": {
@@ -1898,16 +1866,6 @@
                         "type": {
                             "kind": "INPUT_OBJECT",
                             "name": "ModelIntInput",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
-                        "name": "timeRecorded",
-                        "description": null,
-                        "type": {
-                            "kind": "INPUT_OBJECT",
-                            "name": "ModelStringInput",
                             "ofType": null
                         },
                         "defaultValue": null
@@ -1981,16 +1939,6 @@
                         "type": {
                             "kind": "SCALAR",
                             "name": "Int",
-                            "ofType": null
-                        },
-                        "defaultValue": null
-                    },
-                    {
-                        "name": "timeRecorded",
-                        "description": null,
-                        "type": {
-                            "kind": "SCALAR",
-                            "name": "AWSDateTime",
                             "ofType": null
                         },
                         "defaultValue": null

@@ -6,6 +6,7 @@ import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;
@@ -116,6 +117,8 @@ public class CompassActivity extends Activity implements View.OnClickListener {
     private void hapticOnLocation(float direction, int intensity){
 
         // steady vibration to magnetic north
+
+        Log.i("Haptics", "Registering");
 
         float xNormalized;
 

@@ -72,7 +72,6 @@ query SyncHRates(
     items {
       id
       currentRate
-      timeRecorded
       _version
       _deleted
       _lastChangedAt
@@ -87,7 +86,6 @@ query GetHRate($id: ID!) {
   getHRate(id: $id) {
     id
     currentRate
-    timeRecorded
     _version
     _deleted
     _lastChangedAt
@@ -104,7 +102,6 @@ query ListHRates(
     items {
       id
       currentRate
-      timeRecorded
       _version
       _deleted
       _lastChangedAt

@@ -5,14 +5,17 @@ import android.util.Log;
 
 import com.amplifyframework.AmplifyException;
 import com.amplifyframework.api.aws.AWSApiPlugin;
+import com.amplifyframework.api.graphql.model.ModelMutation;
+import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.AuthChannelEventName;
-import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
-import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.core.InitializationStatus;
 import com.amplifyframework.datastore.AWSDataStorePlugin;
+import com.amplifyframework.datastore.generated.model.HRate;
+import com.amplifyframework.datastore.generated.model.Todo;
 import com.amplifyframework.hub.HubChannel;
+import com.jakewharton.threetenabp.AndroidThreeTen;
 
 public class AmplifyApp extends Application {
     public void onCreate() {
@@ -54,17 +57,46 @@ public class AmplifyApp extends Application {
         );
         */
 
-        /*
-        //sign in
 
+        //sign in
+        /*
         Amplify.Auth.signIn(
                 "cg",
                 "Caseygauss1",
                 result -> Log.i("AuthQuickstart", result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete"),
                 error -> Log.e("AuthQuickstart", error.toString())
         );
+        /*
 
-         */
+        Amplify.DataStore.start(
+                () -> Log.i("MyAmplifyApp", "DataStore started"),
+                error -> Log.e("MyAmplifyApp", "Error starting DataStore", error)
+        );
+
+        */
+
+        /*
+        HRate post = HRate.builder()
+                .currentRate(99)
+                .build();
+
+        Amplify.DataStore.save(post,
+                result -> Log.i("MyAmplifyApp", "Created a new HR post successfully"),
+                error -> Log.e("MyAmplifyApp",  "Error creating post", error)
+        );
+        */
+
+        Amplify.API.query(
+                ModelQuery.list(HRate.class, HRate.CURRENT_RATE.gt(0)),
+                response -> {
+                    for (HRate rate : response.getData()) {
+                        Log.i("MyAmplifyApp", String.valueOf(rate.getCurrentRate()));
+                    }
+                },
+                error -> Log.e("MyAmplifyApp", "Query failure", error)
+        );
+
+
 
         Amplify.Hub.subscribe(HubChannel.AUTH,
                 hubEvent -> {
