@@ -8,7 +8,9 @@ import com.amplifyframework.api.aws.AWSApiPlugin;
 import com.amplifyframework.api.graphql.model.ModelMutation;
 import com.amplifyframework.api.graphql.model.ModelQuery;
 import com.amplifyframework.auth.AuthChannelEventName;
+import com.amplifyframework.auth.AuthUserAttributeKey;
 import com.amplifyframework.auth.cognito.AWSCognitoAuthPlugin;
+import com.amplifyframework.auth.options.AuthSignUpOptions;
 import com.amplifyframework.core.Amplify;
 import com.amplifyframework.core.InitializationStatus;
 import com.amplifyframework.datastore.AWSDataStorePlugin;
@@ -45,8 +47,7 @@ public class AmplifyApp extends Application {
                 error -> Log.e("AuthQuickStart", "Sign up failed", error)
         );
 
-         */
-
+        */
         // Confirm sign up with code
         /*
         Amplify.Auth.confirmSignUp(
@@ -59,6 +60,7 @@ public class AmplifyApp extends Application {
 
 
         //sign in
+
         /*
         Amplify.Auth.signIn(
                 "cg",
@@ -66,25 +68,18 @@ public class AmplifyApp extends Application {
                 result -> Log.i("AuthQuickstart", result.isSignInComplete() ? "Sign in succeeded" : "Sign in not complete"),
                 error -> Log.e("AuthQuickstart", error.toString())
         );
-        /*
-
-        Amplify.DataStore.start(
-                () -> Log.i("MyAmplifyApp", "DataStore started"),
-                error -> Log.e("MyAmplifyApp", "Error starting DataStore", error)
-        );
-
         */
 
         /*
         HRate post = HRate.builder()
-                .currentRate(99)
+                .currentRate(111)
                 .build();
 
         Amplify.DataStore.save(post,
                 result -> Log.i("MyAmplifyApp", "Created a new HR post successfully"),
                 error -> Log.e("MyAmplifyApp",  "Error creating post", error)
         );
-        */
+
 
         Amplify.API.query(
                 ModelQuery.list(HRate.class, HRate.CURRENT_RATE.gt(0)),
@@ -96,7 +91,7 @@ public class AmplifyApp extends Application {
                 error -> Log.e("MyAmplifyApp", "Query failure", error)
         );
 
-
+         */
 
         Amplify.Hub.subscribe(HubChannel.AUTH,
                 hubEvent -> {

@@ -15,7 +15,8 @@
         android:src="@drawable/pointer"
         app:layout_constraintBottom_toTopOf="@+id/orientText"
         app:layout_constraintStart_toStartOf="parent"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/todo"
+        android:animateLayoutChanges="true"/>
 
     <TextView
         android:id="@+id/orientText"

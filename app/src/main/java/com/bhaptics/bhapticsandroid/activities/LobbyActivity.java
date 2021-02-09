@@ -13,6 +13,8 @@ import android.widget.ListView;
 
 import androidx.core.app.ActivityCompat;
 
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.HRate;
 import com.bhaptics.bhapticsandroid.BhapticsModule;
 import com.bhaptics.bhapticsandroid.R;
 import com.bhaptics.bhapticsandroid.adapters.ListViewAdapter;
@@ -42,10 +44,17 @@ public class LobbyActivity extends Activity implements View.OnClickListener {
             }
         });
 
+        Amplify.DataStore.observe(HRate.class,
+                started -> Log.i("Tutorial", "Observation began."),
+                change -> Log.i("Tutorial", change.item().toString()),
+                failure -> Log.e("Tutorial", "Observation failed.", failure),
+                () -> Log.i("Tutorial", "Observation complete.")
+        );
+
         BhapticsModule.initialize(getApplicationContext());
 
-        bhapticsManager = BhapticsModule.getBhapticsManager();
 
+        bhapticsManager = BhapticsModule.getBhapticsManager();
 
         adapter = new ListViewAdapter(this, bhapticsManager.getDeviceList());
         ListView listview = (ListView) findViewById(R.id.deviceListView) ;
