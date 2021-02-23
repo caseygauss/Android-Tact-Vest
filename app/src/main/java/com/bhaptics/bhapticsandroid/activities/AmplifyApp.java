@@ -1,6 +1,9 @@
 package com.bhaptics.bhapticsandroid.activities;
 
+
 import android.app.Application;
+import android.content.Context;
+
 import android.util.Log;
 
 import com.amplifyframework.AmplifyException;
@@ -20,8 +23,11 @@ import com.amplifyframework.hub.HubChannel;
 import com.jakewharton.threetenabp.AndroidThreeTen;
 
 public class AmplifyApp extends Application {
+    public static Context context;
+
     public void onCreate() {
         super.onCreate();
+        context = getBaseContext();
 
         try {
             Amplify.addPlugin(new AWSDataStorePlugin());

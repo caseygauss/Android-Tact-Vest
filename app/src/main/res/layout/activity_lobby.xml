@@ -49,6 +49,12 @@
             android:layout_height="wrap_content"
             android:text="Compass App" />
 
+        <Button
+            android:id="@+id/phonetics_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Phonetics Button" />
+
         <TextView
             android:text="bHaptics Device List"
             android:layout_width="match_parent"
@@ -57,7 +63,7 @@
         <ListView
             android:id="@+id/deviceListView"
             android:layout_width="match_parent"
-            android:layout_height="320dp" />
+            android:layout_height="160dp" />
 
     </LinearLayout>
 

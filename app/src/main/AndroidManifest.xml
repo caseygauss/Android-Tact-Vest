@@ -9,6 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
@@ -30,10 +31,11 @@
         <activity android:name=".activities.DrawingActivity" />
         <activity android:name=".activities.TactFileActivity" />
         <activity android:name=".activities.CompassActivity" />
+        <activity android:name=".activities.LanguageActivity"/>
         <activity
             android:name=".activities.VestDemoActivity"
             android:label="@string/title_activity_vest_demo"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

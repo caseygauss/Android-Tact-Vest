@@ -55,4 +55,8 @@ dependencies {
 
     //Manage DateTime in API <26
     implementation 'com.jakewharton.threetenabp:threetenabp:1.2.1'
+
+    //phonetics work
+    implementation 'com.opencsv:opencsv:5.0'
+    implementation "androidx.work:work-runtime:2.5.0"
 }
