@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/guess_2"
+        android:layout_width="140dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="14dp"
+        android:text="Guess 2"
+        android:onClick="checkAnswer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guess_1" />
+
+    <Button
+        android:id="@+id/guess_3"
+        android:layout_width="140dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="13dp"
+        android:text="Guess 3"
+        android:onClick="checkAnswer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guess_2" />
+
+    <Button
+        android:id="@+id/submit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="48dp"
+        android:onClick="processMessage"
+        android:text="Submit"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_to_read" />
+
+    <EditText
+        android:id="@+id/text_to_read"
+        android:layout_width="246dp"
+        android:layout_height="83dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="160dp"
+        android:ems="10"
+        android:gravity="start|top"
+        android:inputType="textMultiLine"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/wpm_input"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginBottom="60dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="500"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/phone_view"
+        android:layout_width="328dp"
+        android:layout_height="76dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginBottom="16dp"
+        android:text="Type below.."
+        android:textAlignment="center"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toTopOf="@+id/individual_phone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/individual_phone"
+        android:layout_width="330dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="16dp"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/phone_view" />
+
+    <Button
+        android:id="@+id/random_word_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="41dp"
+        android:layout_marginTop="43dp"
+        android:text="Gen Random"
+        android:onClick="generateRandomWordGame"
+        app:layout_constraintStart_toEndOf="@+id/submit_button"
+        app:layout_constraintTop_toBottomOf="@+id/text_to_read" />
+
+    <Button
+        android:id="@+id/guess_1"
+        android:layout_width="140dp"
+        android:layout_height="42dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginTop="41dp"
+        android:text="Guess1"
+        android:onClick="checkAnswer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/submit_button" />
+
+    <Button
+        android:id="@+id/repeat_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="47dp"
+        android:text="Repeat"
+        android:onClick="repeatRandom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/random_word_button" />
+
+    <Button
+        android:id="@+id/reveal_phones"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="44dp"
+        android:onClick="revealPhonemes"
+        android:text="Reveal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/repeat_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

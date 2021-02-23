@@ -1,9 +1,38 @@
 # this is an auto generated file. This will be overwritten
+query SyncTodos(
+  $filter: ModelTodoFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncTodos(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      name
+      description
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
+  }
+}
 query GetTodo($id: ID!) {
   getTodo(id: $id) {
     id
     name
     description
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -18,17 +47,48 @@ query ListTodos(
       id
       name
       description
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
     nextToken
+    startedAt
+  }
+}
+query SyncHRates(
+  $filter: ModelHRateFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncHRates(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      currentRate
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+    }
+    nextToken
+    startedAt
   }
 }
 query GetHRate($id: ID!) {
   getHRate(id: $id) {
     id
     currentRate
-    timeRecorded
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -42,10 +102,13 @@ query ListHRates(
     items {
       id
       currentRate
-      timeRecorded
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
     }
     nextToken
+    startedAt
   }
 }

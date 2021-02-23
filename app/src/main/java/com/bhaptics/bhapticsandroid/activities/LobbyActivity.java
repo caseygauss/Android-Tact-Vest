@@ -5,13 +5,19 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
+import android.os.Build;
 import android.os.Bundle;
+import android.speech.SpeechRecognizer;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import com.amplifyframework.core.Amplify;
+import com.amplifyframework.datastore.generated.model.HRate;
 import com.bhaptics.bhapticsandroid.BhapticsModule;
 import com.bhaptics.bhapticsandroid.R;
 import com.bhaptics.bhapticsandroid.adapters.ListViewAdapter;
@@ -28,12 +34,23 @@ public class LobbyActivity extends Activity implements View.OnClickListener {
     private BhapticsManager bhapticsManager;
     private ListViewAdapter adapter;
 
-    private Button scanButton, drawingButton, tactFileButton, tactotExampleButton, pingallButton, compassButton;
+    private Button scanButton, drawingButton, tactFileButton, tactotExampleButton, pingallButton, compassButton, phoneticsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lobby);
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+            checkVoicePermission();
+            Log.i("Speech", "Permissions not set");
+        }
+
+        if(SpeechRecognizer.isRecognitionAvailable(this)){
+            Log.i("Speech", "Recognition is available.");
+        }else{
+            Log.i("Speech", "Not available");
+        }
+
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -41,10 +58,17 @@ public class LobbyActivity extends Activity implements View.OnClickListener {
             }
         });
 
+        Amplify.DataStore.observe(HRate.class,
+                started -> Log.i("Tutorial", "Observation began."),
+                change -> Log.i("Tutorial", change.item().toString()),
+                failure -> Log.e("Tutorial", "Observation failed.", failure),
+                () -> Log.i("Tutorial", "Observation complete.")
+        );
+
         BhapticsModule.initialize(getApplicationContext());
 
-        bhapticsManager = BhapticsModule.getBhapticsManager();
 
+        bhapticsManager = BhapticsModule.getBhapticsManager();
 
         adapter = new ListViewAdapter(this, bhapticsManager.getDeviceList());
         ListView listview = (ListView) findViewById(R.id.deviceListView) ;
@@ -67,6 +91,9 @@ public class LobbyActivity extends Activity implements View.OnClickListener {
 
         compassButton = findViewById(R.id.compassButton);
         compassButton.setOnClickListener(this);
+
+        phoneticsButton = findViewById(R.id.phonetics_button);
+        phoneticsButton.setOnClickListener(this);
 
 
         bhapticsManager.addBhapticsManageCallback(new BhapticsManagerCallback() {
@@ -153,8 +180,16 @@ public class LobbyActivity extends Activity implements View.OnClickListener {
             startActivityForResult(new Intent(this, TactFileActivity.class), 1);
         } else if(v.getId() == R.id.compassButton) {
             startActivityForResult(new Intent(this, CompassActivity.class), 1);
+        } else if(v.getId() == R.id.phonetics_button) {
+            startActivityForResult(new Intent(this, LanguageActivity.class), 1);
         } else{
             startActivityForResult(new Intent(this, VestDemoActivity.class), 1);
+        }
+    }
+
+    public void checkVoicePermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, 1);
         }
     }
 }

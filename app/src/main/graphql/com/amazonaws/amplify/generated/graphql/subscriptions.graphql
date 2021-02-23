@@ -4,6 +4,9 @@ subscription OnCreateTodo {
     id
     name
     description
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -13,6 +16,9 @@ subscription OnUpdateTodo {
     id
     name
     description
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -22,6 +28,9 @@ subscription OnDeleteTodo {
     id
     name
     description
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -30,7 +39,9 @@ subscription OnCreateHRate {
   onCreateHRate {
     id
     currentRate
-    timeRecorded
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -39,7 +50,9 @@ subscription OnUpdateHRate {
   onUpdateHRate {
     id
     currentRate
-    timeRecorded
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -48,7 +61,9 @@ subscription OnDeleteHRate {
   onDeleteHRate {
     id
     currentRate
-    timeRecorded
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }

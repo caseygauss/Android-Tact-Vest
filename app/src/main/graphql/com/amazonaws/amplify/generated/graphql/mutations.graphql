@@ -7,6 +7,9 @@ mutation CreateTodo(
     id
     name
     description
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -19,6 +22,9 @@ mutation UpdateTodo(
     id
     name
     description
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -31,6 +37,9 @@ mutation DeleteTodo(
     id
     name
     description
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -42,7 +51,9 @@ mutation CreateHRate(
   createHRate(input: $input, condition: $condition) {
     id
     currentRate
-    timeRecorded
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -54,7 +65,9 @@ mutation UpdateHRate(
   updateHRate(input: $input, condition: $condition) {
     id
     currentRate
-    timeRecorded
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
@@ -66,7 +79,9 @@ mutation DeleteHRate(
   deleteHRate(input: $input, condition: $condition) {
     id
     currentRate
-    timeRecorded
+    _version
+    _deleted
+    _lastChangedAt
     createdAt
     updatedAt
   }
