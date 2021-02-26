@@ -35,7 +35,7 @@ public class HapticsProcessor extends Worker {
         // the first phone of a 6 phone word, would come in with "6"
 
         try {
-            Log.i("CSV", "Input params are..." + getInputData().getString("phone"));
+            Log.i("Live", "Input params are..." + getInputData().getString("phone"));
 
             toHaptic(getInputData().getString("phone"), getInputData().getInt("readRate", 10), getInputData().getInt("place", 1));
         }catch (Exception e){
@@ -49,10 +49,10 @@ public class HapticsProcessor extends Worker {
         HapticPattern pattern = hapticsMap.get(phone);
         hapticPlayer = BhapticsModule.getHapticPlayer();
         Integer intensity;
-        Integer duration = 100;
+        Integer duration = 150;
         if(placement == 1){
             intensity = 90;
-            duration = 200;
+            duration += 50;
         }else if(placement == 2){
             intensity = 65;
         }else if(placement == 3){
@@ -60,7 +60,7 @@ public class HapticsProcessor extends Worker {
         }else if(placement == 4){
             intensity = 35;
         }else if(placement == 5){
-            intensity = 22;
+            intensity = 25;
         }else{
             intensity = 10;
         }
@@ -70,7 +70,7 @@ public class HapticsProcessor extends Worker {
 
         List<DotPoint> dots = Arrays.asList(dotPoint);
 
-
+        Log.i("Live", "Posted "+ phone + "with direction: "+ pattern.getDirection() + " and dot number: "+Math.round(pattern.getxCo()));
         if(pattern.getDirection() == 1) {
             hapticPlayer.submitDot("VestFront", PositionType.VestFront,  dots, duration);
             //hapticPlayer.submitPath("VestFront", PositionType.VestFront,Arrays.asList(new PathPoint(pattern.getxCo(), pattern.getyCo(), intensity)), duration);
@@ -79,7 +79,7 @@ public class HapticsProcessor extends Worker {
             //    hapticPlayer.submitPath("VestBack", PositionType.VestBack, Arrays.asList(new PathPoint(pattern.getxCo(), pattern.getyCo(), intensity)), duration);
         }
 
-        Log.i("CSVNew", "Delayed output of phoneme here: " + phone + ". With intensity: "+ intensity);
+        //Log.i("CSVNew", "Delayed output of phoneme here: " + phone + ". With intensity: "+ intensity);
     }
 
 }

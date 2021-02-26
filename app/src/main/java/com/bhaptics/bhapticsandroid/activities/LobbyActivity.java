@@ -20,6 +20,7 @@ import com.amplifyframework.core.Amplify;
 import com.amplifyframework.datastore.generated.model.HRate;
 import com.bhaptics.bhapticsandroid.BhapticsModule;
 import com.bhaptics.bhapticsandroid.R;
+import com.bhaptics.bhapticsandroid.SpeechActivity;
 import com.bhaptics.bhapticsandroid.adapters.ListViewAdapter;
 import com.bhaptics.bhapticsmanger.BhapticsManager;
 import com.bhaptics.bhapticsmanger.BhapticsManagerCallback;
@@ -34,7 +35,7 @@ public class LobbyActivity extends Activity implements View.OnClickListener {
     private BhapticsManager bhapticsManager;
     private ListViewAdapter adapter;
 
-    private Button scanButton, drawingButton, tactFileButton, tactotExampleButton, pingallButton, compassButton, phoneticsButton;
+    private Button scanButton, drawingButton, tactFileButton, tactotExampleButton, pingallButton, compassButton, phoneticsButton, speechButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +94,9 @@ public class LobbyActivity extends Activity implements View.OnClickListener {
         compassButton.setOnClickListener(this);
 
         phoneticsButton = findViewById(R.id.phonetics_button);
+        phoneticsButton.setOnClickListener(this);
+
+        speechButton = findViewById(R.id.speech_button);
         phoneticsButton.setOnClickListener(this);
 
 
@@ -172,7 +176,7 @@ public class LobbyActivity extends Activity implements View.OnClickListener {
                 bhapticsManager.scan();
             }
 
-        } else if (v.getId() == R.id.ping_button) {
+        } else if ("cat" == "dog") {
             bhapticsManager.pingAll();
         } else if (v.getId() == R.id.drawing_button) {
             startActivityForResult(new Intent(this, DrawingActivity.class), 1);
@@ -182,6 +186,10 @@ public class LobbyActivity extends Activity implements View.OnClickListener {
             startActivityForResult(new Intent(this, CompassActivity.class), 1);
         } else if(v.getId() == R.id.phonetics_button) {
             startActivityForResult(new Intent(this, LanguageActivity.class), 1);
+        }else if(v.getId() == R.id.ping_button) {
+            Log.i("Speech", "Button pressed");
+            SpeechActivity speechActivity = new SpeechActivity();
+            startActivityForResult(new Intent(this, speechActivity.getClass()), 1);
         } else{
             startActivityForResult(new Intent(this, VestDemoActivity.class), 1);
         }
@@ -189,7 +197,7 @@ public class LobbyActivity extends Activity implements View.OnClickListener {
 
     public void checkVoicePermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, 1);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, 200);
         }
     }
 }

@@ -41,7 +41,7 @@
             android:id="@+id/ping_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Ping All"/>
+            android:text="Stream Speech"/>
 
         <Button
             android:id="@+id/compassButton"
@@ -53,7 +53,13 @@
             android:id="@+id/phonetics_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Phonetics Button" />
+            android:text="Phonetics Training" />
+
+        <Button
+            android:id="@+id/speech_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Speech to Haptics" />
 
         <TextView
             android:text="bHaptics Device List"

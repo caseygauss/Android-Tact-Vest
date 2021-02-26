@@ -32,15 +32,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
-public class LanguageActivity extends Activity {
+public class LanguageActivity extends Activity implements View.OnClickListener {
     public static final String TAG = CompassActivity.class.getSimpleName();
 
     public static Map<String, String> phonemesMap;
-    Map<String, HapticPattern> hapticsMap;
-    Map<Integer, String> trainingMap;
+    public static Map<String, HapticPattern> hapticsMap;
+    public static Map<Integer, String> trainingMap;
     WorkManager workManager;
 
-    Button submitButton, guess1, guess2, guess3, genRandom;
+    Button submitButton, guess1, guess2, guess3, genRandom, backButton;
     EditText messageToRead;
     EditText wpm;
 
@@ -58,6 +58,9 @@ public class LanguageActivity extends Activity {
     protected void onCreate( Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phonetics);
+
+        backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(this);
 
         submitButton = findViewById(R.id.submit_button);
         messageToRead = findViewById(R.id.text_to_read);
@@ -82,14 +85,17 @@ public class LanguageActivity extends Activity {
         hapticsMap = CSVLoader.hapticsMap;
         trainingMap = CSVLoader.trainingMap;
 
-        messageToPhonemes(messageToRead.getText().toString());
+        String returnedReply = messageToPhonemes(messageToRead.getText().toString());
+        individualPhoneView.setText(returnedReply);
 
         hideKeyboard();
     }
 
-    public void messageToPhonemes(String message){
+    public String messageToPhonemes(String message){
         String[] words = message.split(" ");
-        workManager = WorkManager.getInstance();
+        workManager = WorkManager.getInstance(this);
+
+        Log.i("Live", "messageToPhonemes "+message);
 
         String combinedPhrase = "";
         for(String word : words) {
@@ -114,8 +120,9 @@ public class LanguageActivity extends Activity {
 
                     Integer speed = Integer.valueOf(wpm.getText().toString());
                     if(i == 0){
-                        speed += 250;
+                        speed += 100;
                     }
+
                     OneTimeWorkRequest.Builder work = new OneTimeWorkRequest.Builder(HapticsProcessor.class);
                     work.setInputData(builder.build());
                     work.setInitialDelay(speed, TimeUnit.MILLISECONDS);
@@ -123,12 +130,12 @@ public class LanguageActivity extends Activity {
                     place--;
                 }
             }catch (Exception e){
-                Log.i("Speech", "No match for word " + bigWord);
+                Log.i("Speech", "No match for word " + bigWord+ e.getMessage());
             }
 
 
         }
-        individualPhoneView.setText(combinedPhrase);
+        return combinedPhrase;
 
     }
 
@@ -145,15 +152,15 @@ public class LanguageActivity extends Activity {
     }
 
     public void generateRandomWordGame(View view){
-        int randomA = (int)(Math.random() * 50 + 1);
+        int randomA = (int)(Math.random() * 100 + 1);
         Log.i("CSV", "New term is "+randomA);
         Log.i("CSV", "Is there a key at " + trainingMap.containsKey(randomA));
         String answer = trainingMap.get(randomA);
 
         correctAnswer = answer.toUpperCase();
 
-        int randomB = (int)(Math.random() * 50 + 1);
-        int randomC = (int)(Math.random() * 50 + 1);
+        int randomB = (int)(Math.random() * 100 + 1);
+        int randomC = (int)(Math.random() * 100 + 1);
 
         String wrongAnswer1 = trainingMap.get(randomB);
         String wrongAnswer2 = trainingMap.get(randomC);
@@ -174,7 +181,8 @@ public class LanguageActivity extends Activity {
             guess2.setText(wrongAnswer2.toUpperCase());
         }
         individualPhoneView.setTextColor(Color.parseColor("#ffffff"));
-        messageToPhonemes(correctAnswer);
+        String returnedReply = messageToPhonemes(correctAnswer);
+        individualPhoneView.setText(returnedReply);
     }
 
     public void checkAnswer(View view){
@@ -199,5 +207,10 @@ public class LanguageActivity extends Activity {
     }
     public void revealPhonemes(View view){
         individualPhoneView.setTextColor(Color.parseColor("#000000"));
+    }
+
+    @Override
+    public void onClick(View v) {
+        finish();
     }
 }

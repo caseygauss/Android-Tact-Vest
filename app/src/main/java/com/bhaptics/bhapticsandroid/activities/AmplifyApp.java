@@ -20,7 +20,7 @@ import com.amplifyframework.datastore.AWSDataStorePlugin;
 import com.amplifyframework.datastore.generated.model.HRate;
 import com.amplifyframework.datastore.generated.model.Todo;
 import com.amplifyframework.hub.HubChannel;
-import com.jakewharton.threetenabp.AndroidThreeTen;
+
 
 public class AmplifyApp extends Application {
     public static Context context;
